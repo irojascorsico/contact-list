@@ -1,20 +1,16 @@
 {
   "contacts": [
     {
+      "id": "1",
       "company": "Alfreds Futterkiste",
       "contact": "Maria Anders",
       "country": "Germany"
     },
     {
+      "id": "2",
       "company": "Centro comercial Moctezuma",
       "contact": "Francisco Chang",
       "country": "Mexico"
-    },
-    {
-      "company": "Alfreds Futterkiste",
-      "contact": "Maria Anders",
-      "country": "Germany"
     }
   ]
-
 }

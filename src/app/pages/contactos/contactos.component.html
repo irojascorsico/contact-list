@@ -1,13 +1,63 @@
 
+<button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#contactModal">Nuevo</button>
 <table>
     <tr>
       <th>Company</th>
       <th>Contact</th>
       <th>Country</th>
+      <th></th>
     </tr>
-    <tr *ngFor="let item of contactos">
+    <tr *ngFor="let item of contactList">
         <td>{{item.company}}</td>
         <td>{{item.contact}}</td>
         <td>{{item.country}}</td>
+        <td>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal" (click)="populateForm(item)">Editar</button>
+          <button class="btn btn-danger"   (click)="deleteContact(item.id)">Eliminar</button>
+        </td>
       </tr>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm">
+          <div class="mb-3">
+            <label for="company" class="form-label">Company</label>
+            <input type="hidden" name="id" formControlName="id">
+            <input type="text" formControlName="company" class="form-control" id="company" aria-describedby="emailHelp">
+            <div *ngIf="company?.invalid && (company?.dirty || company?.touched)"
+                class="text-danger">
+
+              <div *ngIf="company?.errors?.['required']">
+                Company is required.
+              </div>
+              <div *ngIf="company?.errors?.['minlength']">
+                Company must be at least 8 characters long.
+              </div>
+            
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" formControlName="contact"  class="form-control" id="contact" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" formControlName="country" class="form-control" id="country" aria-describedby="emailHelp">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="closeContactModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveContact()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
